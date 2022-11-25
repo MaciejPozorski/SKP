@@ -6,8 +6,6 @@ public class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("cyfra");
-        List<Person> people = new List<Person>();
         MenuBuilder menuBuilder = new MenuBuilder();
         Services services = new Services();
 
@@ -15,7 +13,7 @@ public class Program
         while (true)
         {
             Console.WriteLine("Press what you want to do (0: exit):");
-            services.showMenu("main");
+            menuBuilder.showMenu("main");
 
             var input = Console.ReadLine();
             switch (input)

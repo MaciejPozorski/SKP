@@ -12,36 +12,24 @@ namespace SKP_T2
         public MenuBuilder()
         {
             menus = new List<Menu>();
-            menus.Add(new Menu() { EnterNr = 1, ActionName = "Show list of workers", MenuName = "main" });
-            menus.Add(new Menu() { EnterNr = 2, ActionName = "Show list days of work", MenuName = "main" });
+            menus.Add(new Menu(1, "Show list of workers", "main"));
+            menus.Add(new Menu(2, "Show list days of work", "main"));
 
-            menus.Add(new Menu() { EnterNr = 1, ActionName = "Add worker", MenuName = "eworker" });
-            menus.Add(new Menu() { EnterNr = 2, ActionName = "Remove worker", MenuName = "eworker" });
+            menus.Add(new Menu(1, "Add worker", "eworker"));
+            menus.Add(new Menu(2, "Remove worker", "eworker"));
 
-            menus.Add(new Menu() { EnterNr = 1, ActionName = "Add work day", MenuName = "eday" });
-            menus.Add(new Menu() { EnterNr = 2, ActionName = "Remove work day", MenuName = "eday" });
+            menus.Add(new Menu(1, "Add work day", "eday"));
+            menus.Add(new Menu(2, "Remove work day", "eday"));
         }
-
-        public void AddAction(int enterNr, string actionName, string menuName)
+        public void showMenu(string menuName)
         {
-            Menu menu = new Menu() { EnterNr = enterNr, ActionName = actionName, MenuName = menuName };
-            menus.Add(menu);
-        }
-        public List<Menu> ReturnMenu()
-        {
-            return menus;
-        }
-        public List<Menu> ReturnMenu(string menuName)
-        {
-            List<Menu> result = new List<Menu>();
             foreach (var item in menus)
             {
                 if (item.MenuName == menuName)
                 {
-                    result.Add(item);
+                    Console.WriteLine($"{item.EnterNr}: {item.ActionName}.");
                 }
             }
-            return result;
         }
     }
 }

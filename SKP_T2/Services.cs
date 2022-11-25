@@ -16,21 +16,15 @@ namespace SKP_T2
             workDays = new List<WorkDay>();
         }
         MenuBuilder menuBuilder = new MenuBuilder();
-        public void showMenu(string menuName)
-        {
-            foreach (var item in menuBuilder.ReturnMenu(menuName))
-            {
-                Console.WriteLine($"{item.EnterNr}: {item.ActionName}.");
-            }
-        }
+        
         public void editService(string menuName)
         {
             while (true)
             {
                 Console.WriteLine();
-                showMenu(menuName);
                 Console.WriteLine("Edit list.");
                 Console.WriteLine("Press what you want to do (0: exit):");
+                menuBuilder.showMenu(menuName);
                 var input = Console.ReadLine();
                 switch (input)
                 {
@@ -49,7 +43,7 @@ namespace SKP_T2
 
         private void addWorker()
         {
-            Console.WriteLine("id firstname lastname phone pesel birth");
+            Console.WriteLine("id firstname lastname phone pesel birth(dd/mm/yyyy)");
             string input = Console.ReadLine();
             Person finalResult = new Person();
             StringBuilder word = new StringBuilder();
