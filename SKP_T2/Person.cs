@@ -34,15 +34,19 @@ namespace SKP_T2
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
-        public DateTime Day { get; set; }
+        public DateOnly Day { get; set; }
         public int Hours { get; set; }
 
-        public WorkDay(int id, int personId, DateTime day, int hours)
+        public WorkDay(int id, int personId, DateOnly day, int hours)
         {
             Id = id;
             PersonId = personId;
             Day = day;
             Hours = hours;
+        }
+
+        public WorkDay()
+        {
         }
     }
 }

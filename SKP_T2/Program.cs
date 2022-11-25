@@ -6,34 +6,49 @@ public class Program
 {
     static void Main(string[] args)
     {
+        List<Person> people = new List<Person>();
+        List<WorkDay> workdays = new List<WorkDay>();
         MenuBuilder menuBuilder = new MenuBuilder();
         Services services = new Services();
+        #region zaladowanie danych
+        people.Add(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+        people.Add(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+        people.Add(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+        people.Add(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
 
-
-        while (true)
+        workdays.Add(new WorkDay(1, 2, new DateOnly(2000, 12, 1), 8));
+        workdays.Add(new WorkDay(2, 1, new DateOnly(2000, 12, 1), 8));
+        workdays.Add(new WorkDay(3, 4, new DateOnly(2000, 12, 1), 8));
+        workdays.Add(new WorkDay(4, 4, new DateOnly(2000, 12, 1), 8));
+        #endregion
+        string input;
+        do
         {
+            Console.Clear();
+            Console.WriteLine("MAIN");
             Console.WriteLine("Press what you want to do (0: exit):");
             menuBuilder.showMenu("main");
 
-            var input = Console.ReadLine();
+            input = Console.ReadLine();
             switch (input)
             {
                 case "1":
-
-                    services.editService("eworker");
+                    services.showList(people);
+                    people = services.editService(people);
                     break;
 
                 case "2":
-
-                    services.editService("eday");
+                    services.showList(workdays);
+                    services.editService(workdays);
                     break;
 
 
                 default:
                     break;
             }
-        }
+        } while (true);
 
     }
+
 
 }
