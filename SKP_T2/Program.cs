@@ -10,7 +10,7 @@ public class Program
         List<WorkDay> workdays = new List<WorkDay>();
         MenuBuilder menuBuilder = new MenuBuilder();
         Services services = new Services();
-        #region zaladowanie danych
+        #region loadTestData
         people.Add(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
         people.Add(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
         people.Add(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
@@ -26,7 +26,7 @@ public class Program
         {
 
             Console.WriteLine("MAIN");
-            Console.WriteLine("Press what you want to do (0: exit):");
+            Console.WriteLine("Choose action (0: exit):");
             menuBuilder.showMenu("main");
 
             input = Console.ReadLine();
@@ -50,7 +50,8 @@ public class Program
 
 
                 default:
-                    Console.WriteLine("Wrong input");
+                    Console.Clear();
+                    Console.WriteLine("Wrong input.");
                     break;
             }
         } while (input != "0");

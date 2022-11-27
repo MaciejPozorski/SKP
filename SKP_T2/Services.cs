@@ -24,7 +24,7 @@ namespace SKP_T2
 
             Console.WriteLine();
             Console.WriteLine("Edit list.");
-            Console.WriteLine("Press what you want to do (0: exit):");
+            Console.WriteLine("Choose action (0: exit):");
             menuBuilder.showMenu("eworker");
             input = Console.ReadLine();
             switch (input)
@@ -64,7 +64,7 @@ namespace SKP_T2
             string input;
 
             Console.WriteLine("Edit list.");
-            Console.WriteLine("Press what you want to do (0: exit):");
+            Console.WriteLine("Choose action (0: exit):");
             menuBuilder.showMenu("eday");
 
             input = Console.ReadLine();
