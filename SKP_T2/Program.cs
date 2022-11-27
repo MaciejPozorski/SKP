@@ -24,7 +24,7 @@ public class Program
         string input;
         do
         {
-            Console.Clear();
+
             Console.WriteLine("MAIN");
             Console.WriteLine("Press what you want to do (0: exit):");
             menuBuilder.showMenu("main");
@@ -33,20 +33,27 @@ public class Program
             switch (input)
             {
                 case "1":
-                    services.showList(people);
-                    people = services.editService(people);
+                    Console.Clear();
+                    services.ShowList(people);
+                    people = services.EditService(people);
                     break;
 
                 case "2":
-                    services.showList(workdays);
-                    services.editService(workdays);
+                    Console.Clear();
+                    services.ShowList(workdays);
+                    services.EditService(workdays);
+                    break;
+                    
+                case "0":
+                    Console.WriteLine("Bye!");
                     break;
 
 
                 default:
+                    Console.WriteLine("Wrong input");
                     break;
             }
-        } while (true);
+        } while (input != "0");
 
     }
 

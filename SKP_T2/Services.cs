@@ -17,79 +17,96 @@ namespace SKP_T2
         }
         MenuBuilder menuBuilder = new MenuBuilder();
 
-        public List<Person> editService(List<Person> people)
+        public List<Person> EditService(List<Person> people)
         {
             this.people = people;
             string input;
-            do
+
+            Console.WriteLine();
+            Console.WriteLine("Edit list.");
+            Console.WriteLine("Press what you want to do (0: exit):");
+            menuBuilder.showMenu("eworker");
+            input = Console.ReadLine();
+            switch (input)
             {
-                Console.WriteLine();
-                Console.WriteLine("Edit list.");
-                Console.WriteLine("Press what you want to do (0: exit):");
-                menuBuilder.showMenu("eworker");
-                input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        addWorker();
-                        return this.people;
+                case "1":
+                    AddWorker();
+                    Console.Clear();
+                    ShowList(this.people);
+                    Console.WriteLine("Done!");
+                    Console.WriteLine("Press any key to leave");
+                    Console.ReadLine();
+                    Console.Clear();
+                    return this.people;
 
 
-                    case "2":
-                        removeWorker();
-                        return this.people;
+                case "2":
+                    RemoveWorker();
+                    Console.Clear();
+                    ShowList(this.people);
+                    Console.WriteLine("Done!");
+                    Console.WriteLine("Press any key to leave");
+                    Console.ReadLine();
+                    Console.Clear();
+                    return this.people;
+
+                default:
+                    Console.Clear();
+                    return this.people;
 
 
-                    case "0":
-                        return this.people;
-
-
-                    default:
-                        return this.people;
-
-                }
-                Console.Clear();
             }
-            while (input == "0");
         }
 
-        public List<WorkDay> editService(List<WorkDay> workDays)
+        public List<WorkDay> EditService(List<WorkDay> workDays)
         {
             this.workDays = workDays;
             string input;
-            do
+
+            Console.WriteLine("Edit list.");
+            Console.WriteLine("Press what you want to do (0: exit):");
+            menuBuilder.showMenu("eday");
+
+            input = Console.ReadLine();
+            switch (input)
             {
-                Console.WriteLine();
-                Console.WriteLine("Edit list.");
-                Console.WriteLine("Press what you want to do (0: exit):");
-                menuBuilder.showMenu("eday");
-                input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        addWorkDay();
-                        return this.workDays;
+                case "1":
+                    AddWorkDay();
+                    Console.Clear();
+                    ShowList(this.workDays);
+                    Console.WriteLine("Done!");
+                    Console.WriteLine("Press any key to leave");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                    return this.workDays;
+                    break;
 
 
-                    case "2":
-                        removeWorkDay();
-                        return this.workDays;
+                case "2":
+                    RemoveWorkDay();
+                    Console.Clear();
+                    ShowList(this.workDays);
+                    Console.WriteLine("Done!");
+                    Console.WriteLine("Press any key to leave");
+                    Console.ReadLine();
+                    Console.Clear();
+                    return this.workDays;
+                    break;
 
 
-                    case "0":
-                        return this.workDays;
 
+                default:
+                    Console.Clear();
+                    return this.workDays;
+                    break;
 
-                    default:
-                        return this.workDays;
-
-                }
-                Console.Clear();
             }
-            while (input == "0");
+
+
         }
 
-        private void removeWorkDay()
+        private void RemoveWorkDay()
         {
             Console.WriteLine("Type day of work id to remove:");
             string id = Console.ReadLine();
@@ -103,7 +120,7 @@ namespace SKP_T2
         }
 
 
-        private void removeWorker()
+        private void RemoveWorker()
         {
             Console.WriteLine("Type worker id to remove:");
             string id = Console.ReadLine();
@@ -116,7 +133,7 @@ namespace SKP_T2
             }
         }
 
-        public void showList(List<Person> people)
+        public void ShowList(List<Person> people)
         {
             foreach (var person in people)
             {
@@ -130,7 +147,7 @@ namespace SKP_T2
             }
         }
 
-        public void showList(List<WorkDay> workDays)
+        public void ShowList(List<WorkDay> workDays)
         {
             foreach (var day in workDays)
             {
@@ -142,9 +159,9 @@ namespace SKP_T2
             }
         }
 
-        private void addWorkDay()
+        private void AddWorkDay()
         {
-            Console.WriteLine("Id PersonID Day(dd/mm/yyyy) Hours");
+            Console.WriteLine("PersonID Day(dd/mm/yyyy) Hours");
             string input = Console.ReadLine();
             WorkDay finalResult = new WorkDay();
             StringBuilder word = new StringBuilder();
@@ -165,17 +182,17 @@ namespace SKP_T2
 
             }
             result[i] = word.ToString();
-            finalResult.Id = Int32.Parse(result[0]);
-            finalResult.PersonId = Int32.Parse(result[1]);
-            finalResult.Day = DateOnly.Parse(result[2]);
-            finalResult.Hours = Int32.Parse(result[3]);
+            finalResult.Id = workDays.Last().Id + 1;
+            finalResult.PersonId = Int32.Parse(result[0]);
+            finalResult.Day = DateOnly.Parse(result[1]);
+            finalResult.Hours = Int32.Parse(result[2]);
 
             workDays.Add(finalResult);
         }
 
-        private void addWorker()
+        private void AddWorker()
         {
-            Console.WriteLine("id firstname lastname phone pesel birth(dd/mm/yyyy)");
+            Console.WriteLine("firstname lastname phone pesel birth(dd/mm/yyyy)");
             string input = Console.ReadLine();
             Person finalResult = new Person();
             StringBuilder word = new StringBuilder();
@@ -196,12 +213,12 @@ namespace SKP_T2
 
             }
             result[i] = word.ToString();
-            finalResult.Id = Int32.Parse(result[0]);
-            finalResult.FirstName = result[1].ToString();
-            finalResult.LastName = result[2].ToString();
-            finalResult.PhoneNumber = double.Parse(result[3]);
-            finalResult.Pesel = double.Parse(result[4]);
-            finalResult.BirthDate = DateOnly.Parse(result[5]);
+            finalResult.Id = people.Last().Id + 1;
+            finalResult.FirstName = result[0].ToString();
+            finalResult.LastName = result[1].ToString();
+            finalResult.PhoneNumber = double.Parse(result[2]);
+            finalResult.Pesel = double.Parse(result[3]);
+            finalResult.BirthDate = DateOnly.Parse(result[4]);
 
             people.Add(finalResult);
         }
