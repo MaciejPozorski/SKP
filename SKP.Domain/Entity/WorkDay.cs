@@ -1,14 +1,14 @@
-﻿using System;
+﻿using SKP.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SKP
+namespace SKP.Domain.Entity
 {
-    public class WorkDay
+    public class WorkDay : BaseEntity
     {
-        public int Id { get; set; }
         public int PersonId { get; set; }
         public DateOnly Day { get; set; }
         public int Hours { get; set; }
@@ -21,8 +21,9 @@ namespace SKP
             Hours = hours;
         }
 
-        //public WorkDay()
-        //{
-        //}
+        public WorkDay()
+        {
+
+        }
     }
 }

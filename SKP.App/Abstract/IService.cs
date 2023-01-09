@@ -9,9 +9,11 @@ namespace SKP.App.Abstract
     public interface IService<T>
     {
         List<T> Items { get; set; }
-        List<T> EditItem(T item);
-        void RemoveItem();
-        void ShowItemList(T item);
-        void Additem();
+        List<T> GetAllItems();
+        int AddItem(T item);
+        void RemoveItem(T item);
+        int UpdateItem(T item);
+        int GetLastId();
+        T GetItemById(int id);
     }
 }

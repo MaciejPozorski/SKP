@@ -1,14 +1,14 @@
-﻿using System;
+﻿using SKP.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SKP
+namespace SKP.Domain.Entity
 {
-    public class Person
+    public class Person : BaseEntity
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public double PhoneNumber { get; set; }
@@ -25,9 +25,9 @@ namespace SKP
             BirthDate = birthDate;
         }
 
-        //public Person()
-        //{
-        //}
+        public Person()
+        {
+        }
     }
 
 
