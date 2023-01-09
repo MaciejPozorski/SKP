@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SKP_T2
+namespace SKP
 {
     public class Menu
     {

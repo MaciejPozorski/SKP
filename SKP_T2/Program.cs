@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SKP_T2;
+namespace SKP;
 
 public class Program
 {
@@ -9,7 +9,8 @@ public class Program
         List<Person> people = new List<Person>();
         List<WorkDay> workdays = new List<WorkDay>();
         MenuBuilder menuBuilder = new MenuBuilder();
-        Services services = new Services();
+        PersonService personServices = new PersonService();
+        WorkDayService workDayServices = new WorkDayService();
         #region loadTestData
         people.Add(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
         people.Add(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
@@ -34,14 +35,14 @@ public class Program
             {
                 case "1":
                     Console.Clear();
-                    services.ShowList(people);
-                    people = services.EditService(people);
+                    personServices.ShowList(people);
+                    personServices.EditService(people);
                     break;
 
                 case "2":
                     Console.Clear();
-                    services.ShowList(workdays);
-                    services.EditService(workdays);
+                    workDayServices.ShowList(workdays);
+                    workDayServices.EditService(workdays);
                     break;
                     
                 case "0":
