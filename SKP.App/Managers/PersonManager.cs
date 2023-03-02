@@ -130,5 +130,11 @@ namespace SKP.App.Managers
                     Console.WriteLine("");
                 }
             }
+
+        public Person GetPersonById(int id)
+        {
+            Person item = _personService.GetItemById(id);
+            return item;
+        }
     }
 }
