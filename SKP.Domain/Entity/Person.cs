@@ -28,6 +28,16 @@ namespace SKP.Domain.Entity
         public Person()
         {
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id.ToString()}  " +
+                        $"FirstName: {FirstName.ToString()}  " +
+                        $"LastName: {LastName.ToString()}  " +
+                        $"PhoneNumber: {PhoneNumber.ToString()}  " +
+                        $"Pesel: {Pesel.ToString()}  " +
+                        $"BirthDate: {BirthDate.ToString()}/n";
+        }
     }
 
 

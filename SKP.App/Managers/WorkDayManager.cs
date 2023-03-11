@@ -40,7 +40,7 @@ namespace SKP.App.Managers
                 case "1":
                     AddWorkDay();
                     Console.Clear();
-                    ShowList();
+                    _workDayService.ToString();
                     Console.WriteLine("Done!");
                     Console.WriteLine("Press any key to leave");
                     Console.ReadLine();
@@ -52,7 +52,7 @@ namespace SKP.App.Managers
                 case "2":
                     RemoveWorkDay();
                     Console.Clear();
-                    ShowList();
+                    _workDayService.ToString();
                     Console.ReadLine();
                     Console.Clear();
 
@@ -126,6 +126,12 @@ namespace SKP.App.Managers
                     $"Hours: {day.Hours}");
                 Console.WriteLine("");
             }
+        }
+
+        public WorkDay GetWorkDayById(int id)
+        {
+            WorkDay day = _workDayService.GetItemById(id);
+            return day;
         }
     }
 }

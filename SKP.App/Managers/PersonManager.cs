@@ -20,10 +20,10 @@ namespace SKP.App.Managers
             _personService = personService;
 
 
-           _personService.AddItem(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-           _personService.AddItem(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-           _personService.AddItem(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-           _personService.AddItem(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            _personService.AddItem(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            _personService.AddItem(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            _personService.AddItem(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            _personService.AddItem(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
         }
         public void EditView()
         {
@@ -31,19 +31,15 @@ namespace SKP.App.Managers
 
             Console.WriteLine("Edit list.");
             Console.WriteLine("Choose action (0: exit):");
-            _menuService.showMenu("eday");
+            _menuService.showMenu("eworker");
 
             input = Console.ReadLine();
             switch (input)
             {
                 case "1":
                     AddPerson();
-                    Console.Clear();
-                    ShowList();
-                    Console.WriteLine("Done!");
-                    Console.WriteLine("Press any key to leave");
-                    Console.ReadLine();
-                    Console.Clear();
+                    _personService.ToString();
+
 
                     break;
 
@@ -51,7 +47,7 @@ namespace SKP.App.Managers
                 case "2":
                     RemovePerson();
                     Console.Clear();
-                    ShowList();
+                    _personService.ToString();
                     Console.ReadLine();
                     Console.Clear();
 
@@ -89,52 +85,43 @@ namespace SKP.App.Managers
             Console.WriteLine("firstname lastname phone pesel birth(dd/mm/yyyy)");
             string input = Console.ReadLine();
             Person finalResult = new Person();
-            StringBuilder word = new StringBuilder();
-            int i = 0;
-            string[] result = new string[6];
-            foreach (char item in input)
+            string[] result = input.Split(' ');
+            try
             {
-                if (item == ' ')
+                if (result.Length != 5)
                 {
-                    result[i] = word.ToString();
-                    i++;
-                    word.Clear();
-                }
-                else
-                {
-                    word.Append(item.ToString());
+                    throw new ArgumentException(message: "Wrong input");
                 }
 
+                finalResult.Id = _personService.GetLastId() + 1;
+                finalResult.FirstName = result[0].ToString();
+                finalResult.LastName = result[1].ToString();
+                finalResult.PhoneNumber = double.Parse(result[2]);
+                finalResult.Pesel = double.Parse(result[3]);
+                finalResult.BirthDate = DateOnly.Parse(result[4]);
+
+                _personService.AddItem(finalResult);
+
+                Console.Clear();
+                Console.WriteLine("Done!");
+                Console.WriteLine("Press any key to leave");
+                Console.ReadLine();
+                Console.Clear();
             }
-            result[i] = word.ToString();
-            finalResult.Id = _personService.GetLastId() + 1;
-            finalResult.FirstName = result[0].ToString();
-            finalResult.LastName = result[1].ToString();
-            finalResult.PhoneNumber = double.Parse(result[2]);
-            finalResult.Pesel = double.Parse(result[3]);
-            finalResult.BirthDate = DateOnly.Parse(result[4]);
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e} exception caught");
+            }
 
-            _personService.AddItem(finalResult);
         }
 
-        public void ShowList()
-            {
-                foreach (var person in _personService.GetAllItems())
-                {
-                    Console.WriteLine($"Id: {person.Id}  " +
-                        $"FirstName: {person.FirstName}  " +
-                        $"LastName: {person.LastName}  " +
-                        $"PhoneNumber: {person.PhoneNumber}  " +
-                        $"Pesel: {person.Pesel}  " +
-                        $"BirthDate: {person.BirthDate}");
-                    Console.WriteLine("");
-                }
-            }
+
 
         public Person GetPersonById(int id)
         {
             Person item = _personService.GetItemById(id);
             return item;
+            item.ToString();
         }
     }
 }

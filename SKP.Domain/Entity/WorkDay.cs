@@ -25,5 +25,15 @@ namespace SKP.Domain.Entity
         {
 
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id.ToString()}  " +
+                    $"PersonId: {PersonId.ToString()}  " +
+                    $"Day: {Day.ToString()}  " +
+                    $"Hours: {Hours.ToString()}\n";
+        }
+
+        
     }
 }

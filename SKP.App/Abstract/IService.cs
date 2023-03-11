@@ -15,5 +15,6 @@ namespace SKP.App.Abstract
         int UpdateItem(T item);
         int GetLastId();
         T GetItemById(int id);
+
     }
 }
