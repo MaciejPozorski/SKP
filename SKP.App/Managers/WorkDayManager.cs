@@ -141,6 +141,11 @@ namespace SKP.App.Managers
             return day;
         }
 
-
+        public void Save()
+        {
+            _workDayService.Save();
+            Console.WriteLine("Save complited!");
+            Console.ReadLine();
+        }
     }
 }

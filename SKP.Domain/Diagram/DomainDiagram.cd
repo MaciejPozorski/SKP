@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SKP.Domain.Common.AuditableModel">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAACAAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\AuditableModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SKP.Domain.Common.BaseEntity">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SKP.Domain.Entity.Menu">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Entity\Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SKP.Domain.Entity.Person">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAEAAAAAAEAAAAQAQAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Entity\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SKP.Domain.Entity.WorkDay">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAQAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entity\WorkDay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

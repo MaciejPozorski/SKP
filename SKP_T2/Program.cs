@@ -31,12 +31,14 @@ public class Program
                     Console.Clear();
                     personManager.ShowList();
                     personManager.EditView();
+                    personManager.Save();
                     break;
 
                 case "2":
                     Console.Clear();
                     workDayManager.ShowList();
                     workDayManager.EditView();
+                    workDayManager.Save();
                     break;
                     
                 case "0":

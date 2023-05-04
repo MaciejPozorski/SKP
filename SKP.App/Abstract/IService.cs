@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SKP.Domain.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace SKP.App.Abstract
         int UpdateItem(T item);
         int GetLastId();
         T GetItemById(int id);
-
+        void Save();
+        void Read();
     }
 }

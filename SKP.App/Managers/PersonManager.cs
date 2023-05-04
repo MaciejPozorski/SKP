@@ -20,10 +20,11 @@ namespace SKP.App.Managers
             _personService = personService;
 
 
-            _personService.AddItem(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-            _personService.AddItem(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-            _personService.AddItem(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-            _personService.AddItem(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            //_personService.AddItem(new Person(1, "Adam", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            //_personService.AddItem(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            //_personService.AddItem(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            //_personService.AddItem(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
+            _personService.Read();
         }
         public void EditView()
         {
@@ -147,6 +148,13 @@ namespace SKP.App.Managers
         public void AddPerson(Person person)
         {
             _personService.AddItem(person);
+        }
+
+        public void Save()
+        {
+            _personService.Save();
+            Console.WriteLine("Save complited!");
+            Console.ReadLine( );
         }
     }
 }

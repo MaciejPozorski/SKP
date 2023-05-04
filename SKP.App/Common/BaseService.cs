@@ -1,5 +1,7 @@
-﻿using SKP.App.Abstract;
+﻿using Newtonsoft.Json;
+using SKP.App.Abstract;
 using SKP.Domain.Common;
+using SKP.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +61,23 @@ namespace SKP.App.Common
         {
             T item = Items.FirstOrDefault(p => p.Id == id);
             return item;                      
+        }
+
+        public void Save()
+        {
+            string value = JsonConvert.SerializeObject(Items);
+            using StreamWriter sw = new StreamWriter($"{typeof(T).Name}.json");
+            using JsonWriter writer = new JsonTextWriter(sw);
+
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Serialize(writer, Items);
+        }
+
+        public void Read()
+        {
+            using StreamReader sr = new StreamReader($"{typeof(T).Name}.json");
+            string file = sr.ReadToEnd();
+            Items = JsonConvert.DeserializeObject<List<T>>(file);
         }
     }
 }
