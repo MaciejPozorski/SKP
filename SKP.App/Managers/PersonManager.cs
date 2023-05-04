@@ -37,15 +37,12 @@ namespace SKP.App.Managers
             switch (input)
             {
                 case "1":
-                    AddPerson();
-                    _personService.ToString();
-
-
+                    AddPersonView();
                     break;
 
 
                 case "2":
-                    RemovePerson();
+                    RemovePersonView();
                     Console.Clear();
                     _personService.ToString();
                     Console.ReadLine();
@@ -62,14 +59,14 @@ namespace SKP.App.Managers
             }
         }
 
-        private void RemovePerson()
+        private void RemovePersonView()
         {
             Console.WriteLine("Type worker id to remove:");
             string id = Console.ReadLine();
             int rId;
             if (Int32.TryParse(id, out rId))
             {
-                _personService.RemoveItem(_personService.GetItemById(rId));
+                RemovePersonById(rId);
                 Console.WriteLine("Done!");
                 Console.WriteLine("Press any key to leave");
             }
@@ -80,7 +77,7 @@ namespace SKP.App.Managers
             }
         }
 
-        private void AddPerson()
+        private void AddPersonView()
         {
             Console.WriteLine("firstname lastname phone pesel birth(dd/mm/yyyy)");
             string input = Console.ReadLine();
@@ -100,10 +97,15 @@ namespace SKP.App.Managers
                 finalResult.Pesel = double.Parse(result[3]);
                 finalResult.BirthDate = DateOnly.Parse(result[4]);
 
-                _personService.AddItem(finalResult);
+                AddPerson(finalResult);
 
                 Console.Clear();
                 Console.WriteLine("Done!");
+                Console.WriteLine("last item:");
+                Console.WriteLine(
+                    _personService.GetItemById(
+                        _personService.GetLastId())
+                    );
                 Console.WriteLine("Press any key to leave");
                 Console.ReadLine();
                 Console.Clear();
@@ -111,17 +113,40 @@ namespace SKP.App.Managers
             catch (Exception e)
             {
                 Console.WriteLine($"{e} exception caught");
+                Console.WriteLine("List not defected. Last item:");
+                Console.WriteLine(
+                    _personService.GetItemById(
+                        _personService.GetLastId())
+                    );
+                Console.ReadLine() ;
+                Console.Clear();
             }
 
         }
 
-
+        public void ShowList()
+        {
+            foreach (var item in _personService.GetAllItems())
+            {
+                Console.WriteLine(item);
+            }
+        }
 
         public Person GetPersonById(int id)
         {
             Person item = _personService.GetItemById(id);
             return item;
-            item.ToString();
+        }
+
+        public void RemovePersonById(int id)
+        {
+            Person p = _personService.GetItemById(id);
+            _personService.RemoveItem(p);
+        }
+
+        public void AddPerson(Person person)
+        {
+            _personService.AddItem(person);
         }
     }
 }

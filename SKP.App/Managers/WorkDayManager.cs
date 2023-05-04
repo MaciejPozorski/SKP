@@ -16,14 +16,14 @@ namespace SKP.App.Managers
         private IService<WorkDay> _workDayService;
         public WorkDayManager(MenuService menuService, IService<WorkDay> workDayService)
         {
-            _menuService= menuService;
-            _workDayService= workDayService;
+            _menuService = menuService;
+            _workDayService = workDayService;
 
 
-           _workDayService.AddItem(new WorkDay(1, 2, new DateOnly(2000, 12, 1), 8));
-           _workDayService.AddItem(new WorkDay(2, 1, new DateOnly(2000, 12, 1), 8));
-           _workDayService.AddItem(new WorkDay(3, 4, new DateOnly(2000, 12, 1), 8));
-           _workDayService.AddItem(new WorkDay(4, 4, new DateOnly(2000, 12, 1), 8));
+            _workDayService.AddItem(new WorkDay(1, 2, new DateOnly(2000, 12, 1), 8));
+            _workDayService.AddItem(new WorkDay(2, 1, new DateOnly(2000, 12, 1), 8));
+            _workDayService.AddItem(new WorkDay(3, 4, new DateOnly(2000, 12, 1), 8));
+            _workDayService.AddItem(new WorkDay(4, 4, new DateOnly(2000, 12, 1), 8));
         }
 
         public void EditView()
@@ -38,19 +38,13 @@ namespace SKP.App.Managers
             switch (input)
             {
                 case "1":
-                    AddWorkDay();
-                    Console.Clear();
-                    _workDayService.ToString();
-                    Console.WriteLine("Done!");
-                    Console.WriteLine("Press any key to leave");
-                    Console.ReadLine();
-                    Console.Clear();
+                    AddWorkDayView();
 
                     break;
 
 
                 case "2":
-                    RemoveWorkDay();
+                    RemoveWorkDayView();
                     Console.Clear();
                     _workDayService.ToString();
                     Console.ReadLine();
@@ -67,7 +61,7 @@ namespace SKP.App.Managers
             }
         }
 
-        private void RemoveWorkDay()
+        private void RemoveWorkDayView()
         {
             Console.WriteLine("Type day of work id to remove:");
             string id = Console.ReadLine();
@@ -85,46 +79,59 @@ namespace SKP.App.Managers
             }
         }
 
-        private void AddWorkDay()
+        private void AddWorkDayView()
         {
             Console.WriteLine("PersonID Day(dd/mm/yyyy) Hours");
             string input = Console.ReadLine();
             WorkDay finalResult = new WorkDay();
             StringBuilder word = new StringBuilder();
             int i = 0;
-            string[] result = new string[6];
-            foreach (char item in input)
+            string[] result = input.Split(' ');
+            try
             {
-                if (item == ' ')
+                if (result.Length != 3)
                 {
-                    result[i] = word.ToString();
-                    i++;
-                    word.Clear();
-                }
-                else
-                {
-                    word.Append(item.ToString());
+                    throw new ArgumentException(message: "Wrong input");
                 }
 
+                result[i] = word.ToString();
+                finalResult.Id = _workDayService.GetLastId() + 1;
+                finalResult.PersonId = Int32.Parse(result[0]);
+                finalResult.Day = DateOnly.Parse(result[1]);
+                finalResult.Hours = Int32.Parse(result[2]);
+
+                _workDayService.AddItem(finalResult);
+
+                Console.Clear();
+                Console.WriteLine("Done!");
+                Console.WriteLine("last item:");
+                Console.WriteLine(
+                    _workDayService.GetItemById(
+                        _workDayService.GetLastId())
+                    );
+                Console.WriteLine("Press any key to leave");
+                Console.ReadLine();
+                Console.Clear();
             }
-            result[i] = word.ToString();
-            finalResult.Id = _workDayService.GetLastId() + 1;
-            finalResult.PersonId = Int32.Parse(result[0]);
-            finalResult.Day = DateOnly.Parse(result[1]);
-            finalResult.Hours = Int32.Parse(result[2]);
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e} exception caught");
+                Console.WriteLine("List not defected. Last item:");
+                Console.WriteLine(
+                    _workDayService.GetItemById(
+                        _workDayService.GetLastId())
+                    );
+                Console.ReadLine();
+                Console.Clear();
+            }
 
-            _workDayService.AddItem(finalResult);
         }
 
         public void ShowList()
         {
-            foreach (var day in _workDayService.GetAllItems())
+            foreach (var item in _workDayService.GetAllItems())
             {
-                Console.WriteLine($"Id: {day.Id}  " +
-                    $"PersonId: {day.PersonId}  " +
-                    $"Day: {day.Day}  " +
-                    $"Hours: {day.Hours}");
-                Console.WriteLine("");
+                Console.WriteLine(item);
             }
         }
 
@@ -133,5 +140,7 @@ namespace SKP.App.Managers
             WorkDay day = _workDayService.GetItemById(id);
             return day;
         }
+
+
     }
 }

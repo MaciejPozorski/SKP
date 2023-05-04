@@ -1,3 +1,4 @@
+using Castle.Core.Logging;
 using FluentAssertions;
 
 namespace SKP.Tests
@@ -47,12 +48,54 @@ namespace SKP.Tests
             day.Should().NotBeNull();
             day.Should().BeOfType<WorkDay>();
             day.Should().BeSameAs(workDay);
+            
         }
 
         [Fact]
         public void Test3()
         {
+            Person person = new Person(
+                5,
+                "jacek",
+                "nazwisko",
+                123654,
+                654,
+                new DateOnly(3232, 5, 7));
 
+
+            Mock<IService<Person>> mock = new Mock<IService<Person>>();
+            mock.Setup(s => s.GetItemById(person.Id)).Returns(person);
+            mock.Setup(s => s.RemoveItem(It.IsAny<Person>()));
+
+            PersonManager manager = new PersonManager(new MenuService(), mock.Object);
+
+            manager.RemovePersonById(person.Id);
+
+            mock.Verify(m => m.RemoveItem(person));
         }
+
+        [Fact]
+        public void Test4()
+        {
+            Person person = new Person(
+                5,
+                "jacek",
+                "nazwisko",
+                123654,
+                654,
+                new DateOnly(3232, 5, 7));
+
+
+            Mock<IService<Person>> mock = new Mock<IService<Person>>();
+            mock.Setup(s => s.GetItemById(person.Id)).Returns(person);
+            mock.Setup(s => s.AddItem(It.IsAny<Person>()));
+
+            PersonManager manager = new PersonManager(new MenuService(), mock.Object);
+
+            manager.AddPerson(person);
+
+            mock.Verify(m => m.AddItem(person));
+        }
+
     }
 }

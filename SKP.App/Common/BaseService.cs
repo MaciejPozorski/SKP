@@ -58,9 +58,7 @@ namespace SKP.App.Common
         public T GetItemById(int id)
         {
             T item = Items.FirstOrDefault(p => p.Id == id);
-            return item;
-            
-            
+            return item;                      
         }
     }
 }
