@@ -20,10 +20,11 @@ namespace SKP.App.Managers
             _workDayService = workDayService;
 
 
-            _workDayService.AddItem(new WorkDay(1, 2, new DateOnly(2000, 12, 1), 8));
-            _workDayService.AddItem(new WorkDay(2, 1, new DateOnly(2000, 12, 1), 8));
-            _workDayService.AddItem(new WorkDay(3, 4, new DateOnly(2000, 12, 1), 8));
-            _workDayService.AddItem(new WorkDay(4, 4, new DateOnly(2000, 12, 1), 8));
+            //_workDayService.AddItem(new WorkDay(1, 2, new DateOnly(2000, 12, 1), 8));
+            //_workDayService.AddItem(new WorkDay(2, 1, new DateOnly(2000, 12, 1), 8));
+            //_workDayService.AddItem(new WorkDay(3, 4, new DateOnly(2000, 12, 1), 8));
+            //_workDayService.AddItem(new WorkDay(4, 4, new DateOnly(2000, 12, 1), 8));
+            _workDayService.Read();
         }
 
         public void EditView()
@@ -141,11 +142,6 @@ namespace SKP.App.Managers
             return day;
         }
 
-        public void Save()
-        {
-            _workDayService.Save();
-            Console.WriteLine("Save complited!");
-            Console.ReadLine();
-        }
+
     }
 }

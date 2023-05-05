@@ -10,6 +10,6 @@ namespace SKP.App.Concrete
 {
     public class PersonService : BaseService<Person>
     {
-        
+
     }
 }

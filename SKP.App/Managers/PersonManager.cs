@@ -150,11 +150,6 @@ namespace SKP.App.Managers
             _personService.AddItem(person);
         }
 
-        public void Save()
-        {
-            _personService.Save();
-            Console.WriteLine("Save complited!");
-            Console.ReadLine( );
-        }
+
     }
 }

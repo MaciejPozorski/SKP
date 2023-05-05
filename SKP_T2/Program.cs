@@ -13,8 +13,10 @@ public class Program
         WorkDayService workDayService = new WorkDayService();
         PersonService personService= new PersonService();
         MenuService menuService = new MenuService();
+        MemoryService memoryService = new MemoryService();
         WorkDayManager workDayManager = new WorkDayManager(menuService, workDayService);
         PersonManager personManager = new PersonManager(menuService, personService);
+        XmlService xmlService = new XmlService(personService, workDayService);
         
         string input;
         do
@@ -31,16 +33,24 @@ public class Program
                     Console.Clear();
                     personManager.ShowList();
                     personManager.EditView();
-                    personManager.Save();
+                    memoryService.Save(personService);
                     break;
 
                 case "2":
                     Console.Clear();
                     workDayManager.ShowList();
                     workDayManager.EditView();
-                    workDayManager.Save();
+                    memoryService.Save(workDayService);
                     break;
-                    
+                case "3":
+                    Console.Clear();
+                    xmlService.GetWorkersByDay();
+                    break;
+                case "4":
+                    Console.Clear();
+                    xmlService.WorkDayToXml();
+                    break;
+
                 case "0":
                     Console.WriteLine("Bye!");
                     break;
