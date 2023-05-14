@@ -11,46 +11,44 @@ public class Program
     static void Main(string[] args)
     {
         WorkDayService workDayService = new WorkDayService();
-        PersonService personService= new PersonService();
+        PersonService personService = new PersonService();
         MenuService menuService = new MenuService();
-        MemoryService memoryService = new MemoryService();
+        FileService memoryService = new FileService();
         WorkDayManager workDayManager = new WorkDayManager(menuService, workDayService);
         PersonManager personManager = new PersonManager(menuService, personService);
-        XmlService xmlService = new XmlService(personService, workDayService);
-        
+        XlsxMenager xlsxMenager = new XlsxMenager(personService, workDayService);
+        XlsxService xlsxService = new XlsxService(personService, workDayService);
+        ConsoleOvervievMenager consoleOvervievMenager = new ConsoleOvervievMenager(personService, workDayService, menuService);
         string input;
         do
         {
 
+            Console.Clear();
             Console.WriteLine("MAIN");
-            Console.WriteLine("Choose action (0: exit):");
             menuService.showMenu("main");
 
             input = Console.ReadLine();
             switch (input)
             {
                 case "1":
-                    Console.Clear();
                     personManager.ShowList();
                     personManager.EditView();
                     memoryService.Save(personService);
                     break;
 
                 case "2":
-                    Console.Clear();
                     workDayManager.ShowList();
                     workDayManager.EditView();
                     memoryService.Save(workDayService);
                     break;
                 case "3":
-                    Console.Clear();
-                    xmlService.GetWorkersByDay();
-                    break;
-                case "4":
-                    Console.Clear();
-                    xmlService.WorkDayToXml();
+                    consoleOvervievMenager.MenuView();
                     break;
 
+
+                case "4":
+                    xlsxMenager.MenuView();
+                    break;
                 case "0":
                     Console.WriteLine("Bye!");
                     break;
@@ -62,6 +60,7 @@ public class Program
                     break;
             }
         } while (input != "0");
+
 
     }
 

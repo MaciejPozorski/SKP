@@ -20,20 +20,22 @@ namespace SKP.App.Concrete
             _workDayService = workDayService;
         }
 
-        public void GetWorkersByDay()
-        {
-            var innerJoin = _workDayService.GetAllItems().Join(
-                _personService.GetAllItems(),
-                w => w.PersonId,
-                p => p.Id,
-                (w, p) => new
-                {
-                    workdayName = w.Day,
-                    personName = p.FirstName
-                }
-                );
+        //public void GetWorkersByDay()
+        //{
+        //    //var innerJoin = _workDayService.GetAllItems().Join(
+        //    //    _personService.GetAllItems(),
+        //    //    w => w.PersonId,
+        //    //    p => p.Id,
+        //    //    (w, p) => new
+        //    //    {
+        //    //        workdayName = w.Day,
+        //    //        personName = p.FirstName
+        //    //    }
+        //    //    );
 
-        }
+
+
+        //}
 
         public void WorkDayToXml()
         {

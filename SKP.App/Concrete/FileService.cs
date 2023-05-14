@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SKP.App.Concrete
 {
-    public class MemoryService
+    public class FileService
     {
         
 
@@ -24,6 +24,12 @@ namespace SKP.App.Concrete
             _workDayService.Save();
             Console.WriteLine("Save complited!");
             Console.ReadLine();
+        }
+
+        public bool fileChecker(Type type)
+        {
+            bool exist = File.Exists($"{type.Name}.json");
+            return exist;
         }
     }
 }

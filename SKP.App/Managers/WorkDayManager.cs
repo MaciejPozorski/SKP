@@ -24,7 +24,8 @@ namespace SKP.App.Managers
             //_workDayService.AddItem(new WorkDay(2, 1, new DateOnly(2000, 12, 1), 8));
             //_workDayService.AddItem(new WorkDay(3, 4, new DateOnly(2000, 12, 1), 8));
             //_workDayService.AddItem(new WorkDay(4, 4, new DateOnly(2000, 12, 1), 8));
-            _workDayService.Read();
+            if(File.Exists($"{typeof(WorkDay).Name}.json"))
+                _workDayService.Read();
         }
 
         public void EditView()
@@ -32,7 +33,6 @@ namespace SKP.App.Managers
             string input;
 
             Console.WriteLine("Edit list.");
-            Console.WriteLine("Choose action (0: exit):");
             _menuService.showMenu("eday");
 
             input = Console.ReadLine();
@@ -85,8 +85,6 @@ namespace SKP.App.Managers
             Console.WriteLine("PersonID Day(dd/mm/yyyy) Hours");
             string input = Console.ReadLine();
             WorkDay finalResult = new WorkDay();
-            StringBuilder word = new StringBuilder();
-            int i = 0;
             string[] result = input.Split(' ');
             try
             {
@@ -95,7 +93,6 @@ namespace SKP.App.Managers
                     throw new ArgumentException(message: "Wrong input");
                 }
 
-                result[i] = word.ToString();
                 finalResult.Id = _workDayService.GetLastId() + 1;
                 finalResult.PersonId = Int32.Parse(result[0]);
                 finalResult.Day = DateOnly.Parse(result[1]);

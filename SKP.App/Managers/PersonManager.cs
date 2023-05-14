@@ -13,6 +13,7 @@ namespace SKP.App.Managers
     {
         private readonly MenuService _menuService;
         private IService<Person> _personService;
+        FileService _memoryService = new FileService();
 
         public PersonManager(MenuService menuService, IService<Person> personService)
         {
@@ -24,40 +25,47 @@ namespace SKP.App.Managers
             //_personService.AddItem(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
             //_personService.AddItem(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
             //_personService.AddItem(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-            _personService.Read();
+            if (_memoryService.fileChecker(typeof(Person)))
+                _personService.Read();
         }
         public void EditView()
         {
             string input;
 
             Console.WriteLine("Edit list.");
-            Console.WriteLine("Choose action (0: exit):");
             _menuService.showMenu("eworker");
 
             input = Console.ReadLine();
-            switch (input)
-            {
-                case "1":
-                    AddPersonView();
-                    break;
+            do
+            { 
+                switch (input)
+                {
+                    case "1":
+                        AddPersonView();
+                        break;
 
 
-                case "2":
-                    RemovePersonView();
-                    Console.Clear();
-                    _personService.ToString();
-                    Console.ReadLine();
-                    Console.Clear();
+                    case "2":
+                        RemovePersonView();
+                        Console.Clear();
+                        _personService.ToString();
+                        Console.ReadLine();
+                        Console.Clear();
 
-                    break;
+                        break;
+
+                    case "0":
+                        Console.Clear();
+                        break;
 
 
+                    default:
+                        Console.WriteLine("wrong input");
+                        break;
 
-                default:
-                    Console.Clear();
-                    break;
-
-            }
+                }
+            
+            } while (input != "0");
         }
 
         private void RemovePersonView()
@@ -119,7 +127,7 @@ namespace SKP.App.Managers
                     _personService.GetItemById(
                         _personService.GetLastId())
                     );
-                Console.ReadLine() ;
+                Console.ReadLine();
                 Console.Clear();
             }
 
