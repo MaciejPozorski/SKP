@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using SKP.App.Abstract;
 using SKP.Domain.Entity;
 using System;
@@ -15,6 +16,7 @@ namespace SKP.App.Concrete
         PersonService _personService;
         WorkDayService _workDayService;
         OverviewSerivce _overviewSerivce;
+        FileService _fileService = new FileService();
         public XlsxService(PersonService personService, WorkDayService workDayService)
         {
             _personService = personService;
@@ -22,7 +24,7 @@ namespace SKP.App.Concrete
 
         }
 
-        public IXLWorksheet XlsxGeneratorById(int id)
+        private IXLWorksheet XlsxGeneratorById(int id)
         {
             Person person = _personService.GetItemById(id);
             var workbook = new XLWorkbook();
@@ -47,7 +49,7 @@ namespace SKP.App.Concrete
             return ws;
         }
 
-        public void FinalOvvFileGenerator()
+        public bool OverviewFileGenerator()
         {
             var workbook = new XLWorkbook();
 
@@ -56,10 +58,13 @@ namespace SKP.App.Concrete
                 var sheet = XlsxGeneratorById(item.Id);
                 workbook.AddWorksheet(sheet);
             }
-
             workbook.SaveAs("EveryoneOverview.xlsx");
+
+            bool check = _fileService.fileChecker("EveryoneOverview.xlsx");
+
+            return check;
         }
-        public void FinalOvvFileGenerator(int id)
+        public bool OverviewFileGenerator(int id)
         {
             var workbook = new XLWorkbook();
 
@@ -68,6 +73,10 @@ namespace SKP.App.Concrete
             workbook.AddWorksheet(neWS);
 
             workbook.SaveAs($"Person_overview_{id}.xlsx");
+
+            bool check = _fileService.fileChecker($"Person_overview_{id}.xlsx");
+
+            return check;
         }
     }
 }

@@ -26,9 +26,9 @@ namespace SKP.App.Concrete
             Console.ReadLine();
         }
 
-        public bool fileChecker(Type type)
+        public bool fileChecker(string file)
         {
-            bool exist = File.Exists($"{type.Name}.json");
+            bool exist = File.Exists(file);
             return exist;
         }
     }

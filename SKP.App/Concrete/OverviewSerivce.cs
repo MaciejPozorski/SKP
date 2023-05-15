@@ -25,7 +25,7 @@ namespace SKP.App.Concrete
             Person person = _personService.GetItemById(id);
 
             Console.WriteLine($"{person.FirstName} {person.LastName}:");
-            OverviewWriter((IEnumerable<dynamic>)WorkDayInfoGetterByPersonId(id));
+            WorkDayInfoWriter((IEnumerable<dynamic>)WorkDayInfoGetterByPersonId(id));
         }
 
         public IEnumerable WorkDayInfoGetterByPersonId(int id)
@@ -36,7 +36,7 @@ namespace SKP.App.Concrete
             return data;
         }
 
-        private void OverviewWriter(IEnumerable<dynamic> workDayList)
+        private void WorkDayInfoWriter(IEnumerable<dynamic> workDayList)
         {
             foreach (var item in workDayList)
             {

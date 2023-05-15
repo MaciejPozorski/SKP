@@ -25,7 +25,7 @@ namespace SKP.App.Managers
             //_personService.AddItem(new Person(2, "Maciej", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
             //_personService.AddItem(new Person(3, "Zbychu", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
             //_personService.AddItem(new Person(4, "Kasia", "Pączek", 123456789, 12345678911, new DateOnly(1111, 11, 11)));
-            if (_memoryService.fileChecker(typeof(Person)))
+            if (_memoryService.fileChecker(typeof(Person).Name + ".json"))
                 _personService.Read();
         }
         public void EditView()

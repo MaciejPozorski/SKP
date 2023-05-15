@@ -16,9 +16,7 @@ public class Program
         FileService memoryService = new FileService();
         WorkDayManager workDayManager = new WorkDayManager(menuService, workDayService);
         PersonManager personManager = new PersonManager(menuService, personService);
-        XlsxMenager xlsxMenager = new XlsxMenager(personService, workDayService);
-        XlsxService xlsxService = new XlsxService(personService, workDayService);
-        ConsoleOvervievMenager consoleOvervievMenager = new ConsoleOvervievMenager(personService, workDayService, menuService);
+        OvervievMenager consoleOvervievMenager = new OvervievMenager(personService, workDayService);
         string input;
         do
         {
@@ -43,11 +41,6 @@ public class Program
                     break;
                 case "3":
                     consoleOvervievMenager.MenuView();
-                    break;
-
-
-                case "4":
-                    xlsxMenager.MenuView();
                     break;
                 case "0":
                     Console.WriteLine("Bye!");

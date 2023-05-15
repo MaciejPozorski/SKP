@@ -7,25 +7,21 @@ using System.Threading.Tasks;
 
 namespace SKP.App.Managers
 {
-    public class ConsoleOvervievMenager
+    public class OvervievMenager
     {
-        private PersonService _personService;
-        private WorkDayService _workDayService;
-        private MenuService _menuService;
+        private MenuService _menuService = new MenuService();
         OverviewSerivce _overviewSerivce;
-        public ConsoleOvervievMenager(PersonService personService, WorkDayService workDayService, MenuService menuService)
+        XlsxMenager _xlsxMenager;
+        public OvervievMenager(PersonService personService, WorkDayService workDayService)
         {
-            _personService = personService;
-            _workDayService = workDayService;
-            _menuService = menuService;
             _overviewSerivce = new OverviewSerivce(personService, workDayService);
-
+            _xlsxMenager = new XlsxMenager(personService, workDayService);
         }
 
         public void MenuView()
         {
             Console.Clear();
-            _menuService.showMenu("cwovv");
+            _menuService.showMenu("ovv");
             string input = Console.ReadLine();
             switch (input)
             {
@@ -38,6 +34,10 @@ namespace SKP.App.Managers
                     Console.Clear();
                     _overviewSerivce.FullOverviewWriter();
                     Console.ReadLine();
+                    break;
+                case "3":
+                    Console.Clear();
+                    _xlsxMenager.MenuView();
                     break;
             }
         }

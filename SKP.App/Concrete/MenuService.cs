@@ -26,8 +26,9 @@ namespace SKP.App.Concrete
             AddItem(new Menu(1, "Add work day", "eday"));
             AddItem(new Menu(2, "Remove work day", "eday"));
 
-            AddItem(new Menu(1, "Generate overview for one person", "cwovv"));
-            AddItem(new Menu(2, "Generate overview for everyone", "cwovv"));
+            AddItem(new Menu(1, "Generate console overview for one person", "ovv"));
+            AddItem(new Menu(2, "Generate console overview for everyone", "ovv"));
+            AddItem(new Menu(3, "Create excel file", "ovv"));
 
             AddItem(new Menu(1, "Generate excel file for one person", "xlsxovv"));
             AddItem(new Menu(2, "Generate excel file for everyone", "xlsxovv"));
